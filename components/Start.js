@@ -7,12 +7,15 @@ import {
 	Pressable,
 	TextInput,
 	ImageBackground,
+	TouchableOpacity,
 } from 'react-native';
 
 const image = '../assets/Background-image.png';
+const colors = ['rgb(9 11 8)', 'rgb(72 65 85)', 'rgb(139 149 165)', 'rgb(185 199 174)'];
 
 const Start = ({ navigation }) => {
 	const [name, setName] = useState('');
+	const [selectedColor, setSelectedColor] = useState(colors[0]);
 
 	return (
 		<ImageBackground source={require(image)} style={{ width: '100%', height: '100%' }}>
@@ -25,9 +28,23 @@ const Start = ({ navigation }) => {
 						onChangeText={setName}
 						placeholder='Your Name'
 					/>
+					<Text>Choose Background Color:</Text>
+					<View style={styles.colorListContainer}>
+						{colors.map((color) => {
+							const createdStyles = { ...styles.colorPicker, backgroundColor: color };
+							return (
+								<TouchableOpacity
+									key={color}
+									onPress={() => {
+										setSelectedColor(color);
+									}}
+									style={createdStyles}></TouchableOpacity>
+							);
+						})}
+					</View>
 					<Pressable
 						style={styles.startChattingButton}
-						onPress={() => navigation.navigate('Chat', { name: name })}>
+						onPress={() => navigation.navigate('Chat', { name: name, color: selectedColor })}>
 						<Text style={styles.chatButtonText}>Start Chatting</Text>
 					</Pressable>
 				</View>
@@ -44,7 +61,6 @@ const styles = StyleSheet.create({
 	},
 	appTitle: {
 		fontSize: 45,
-		fontWeight: 600,
 		color: '#FFFFFF',
 	},
 	inputContainer: {
@@ -64,6 +80,18 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 		borderRadius: 3,
 	},
+	colorListContainer: {
+		flexDirection: 'row',
+		padding: 20,
+	},
+	colorPicker: {
+		width: 40,
+		height: 40,
+		padding: 10,
+		marginLeft: 10,
+		marginRight: 10,
+		borderRadius: 20,
+	},
 	startChattingButton: {
 		backgroundColor: '#757083',
 		width: '88%',
@@ -74,7 +102,6 @@ const styles = StyleSheet.create({
 	},
 	chatButtonText: {
 		fontSize: 16,
-		fontWeight: 600,
 		color: '#ffffff',
 	},
 });

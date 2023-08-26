@@ -3,14 +3,16 @@ import { StyleSheet, View, Text } from 'react-native';
 
 const Chat = ({ route, navigation }) => {
 	const { name } = route.params;
+	const { color } = route.params;
+	const dynamicStyledBackground = { ...styles.container, backgroundColor: color };
 
 	useEffect(() => {
 		navigation.setOptions({ title: name });
 	}, []);
 
 	return (
-		<View style={styles.container}>
-			<Text>Hello Screen2!</Text>
+		<View style={dynamicStyledBackground}>
+			<Text style={{ color: 'white' }}>Chat screen</Text>
 		</View>
 	);
 };
