@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 const image = '../assets/Background-image.png';
-const colors = ['rgb(9 11 8)', 'rgb(72 65 85)', 'rgb(139 149 165)', 'rgb(185 199 174)'];
+const colors = ['rgb(9 11 8)', 'rgb(78, 93, 104)', 'rgb(153, 163, 177)', 'rgb(185 199 174)'];
 
 const Start = ({ navigation }) => {
 	const [name, setName] = useState('');
@@ -31,14 +31,27 @@ const Start = ({ navigation }) => {
 					<Text>Choose Background Color:</Text>
 					<View style={styles.colorListContainer}>
 						{colors.map((color) => {
-							const createdStyles = { ...styles.colorPicker, backgroundColor: color };
-							return (
+							const fullColorButton = { ...styles.colorPicker, backgroundColor: color };
+							const borderOnly = {
+								...styles.colorPicker,
+								borderColor: color,
+								borderWidth: 6,
+							};
+
+							return color == selectedColor ? (
 								<TouchableOpacity
 									key={color}
 									onPress={() => {
 										setSelectedColor(color);
 									}}
-									style={createdStyles}></TouchableOpacity>
+									style={fullColorButton}></TouchableOpacity>
+							) : (
+								<TouchableOpacity
+									key={color}
+									onPress={() => {
+										setSelectedColor(color);
+									}}
+									style={borderOnly}></TouchableOpacity>
 							);
 						})}
 					</View>
@@ -52,7 +65,14 @@ const Start = ({ navigation }) => {
 		</ImageBackground>
 	);
 };
-
+// return (
+// 	<TouchableOpacity
+// 		key={color}
+// 		onPress={() => {
+// 			setSelectedColor(color);
+// 		}}
+// 		style={selectedColorStyles}></TouchableOpacity>
+// );
 const styles = StyleSheet.create({
 	mainContainer: {
 		justifyContent: 'space-around',
