@@ -8,6 +8,7 @@ import {
 	TextInput,
 	ImageBackground,
 	TouchableOpacity,
+	KeyboardAvoidingView,
 } from 'react-native';
 
 const image = '../assets/Background-image.png';
@@ -47,6 +48,10 @@ const Start = ({ navigation }) => {
 									style={fullColorButton}></TouchableOpacity>
 							) : (
 								<TouchableOpacity
+									accessible={true}
+									accessibilityLabel='More options'
+									accessibilityHint='Lets you choose to send an image or your geolocation.'
+									accessibilityRole='button'
 									key={color}
 									onPress={() => {
 										setSelectedColor(color);
@@ -62,17 +67,13 @@ const Start = ({ navigation }) => {
 					</Pressable>
 				</View>
 			</View>
+			{Platform.OS === 'ios' || Platform.OS === 'android' ? (
+				<KeyboardAvoidingView behavior='padding' />
+			) : null}
 		</ImageBackground>
 	);
 };
-// return (
-// 	<TouchableOpacity
-// 		key={color}
-// 		onPress={() => {
-// 			setSelectedColor(color);
-// 		}}
-// 		style={selectedColorStyles}></TouchableOpacity>
-// );
+
 const styles = StyleSheet.create({
 	mainContainer: {
 		justifyContent: 'space-around',
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
 		padding: 15,
 		borderWidth: 1,
 		marginTop: 15,
-		marginBottom: 15,
+		marginBottom: 25,
 		borderRadius: 3,
 	},
 	colorListContainer: {
