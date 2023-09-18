@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, KeyboardAvoidingView, Platform } from 'react-native';
-import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -81,7 +81,6 @@ const Chat = ({ db, storage, route, navigation, isConnected }) => {
 	return (
 		<View style={dynamicStyledBackground}>
 			<GiftedChat
-				textInputStyle={styles.chatInput}
 				messages={messages}
 				renderBubble={renderBubble}
 				renderInputToolbar={renderInputToolbar}
