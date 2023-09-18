@@ -73,12 +73,18 @@ const Chat = ({ db, storage, route, navigation, isConnected }) => {
 		);
 	};
 
+	const renderInputToolbar = (props) => {
+		if (isConnected === true) return <InputToolbar {...props} />;
+		else return null;
+	};
+
 	return (
 		<View style={dynamicStyledBackground}>
 			<GiftedChat
 				textInputStyle={styles.chatInput}
 				messages={messages}
 				renderBubble={renderBubble}
+				renderInputToolbar={renderInputToolbar}
 				onSend={(messages) => onSend(messages)}
 				user={{
 					_id: userID,
