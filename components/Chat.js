@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, KeyboardAvoidingView, Platform } from 'react-na
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomActions from './CustomActions';
 
 const Chat = ({ db, storage, route, navigation, isConnected }) => {
 	const { name } = route.params;
@@ -76,6 +77,10 @@ const Chat = ({ db, storage, route, navigation, isConnected }) => {
 	const renderInputToolbar = (props) => {
 		if (isConnected === true) return <InputToolbar {...props} />;
 		else return null;
+	};
+
+	const renderCustomActions = (props) => {
+		return <CustomActions {...props} />;
 	};
 
 	return (
