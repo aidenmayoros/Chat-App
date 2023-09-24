@@ -36,7 +36,7 @@ const Start = ({ navigation }) => {
 	return (
 		<ImageBackground source={require(image)} style={{ width: '100%', height: '100%' }}>
 			<View style={styles.mainContainer}>
-				<Text style={styles.appTitle}>App Title</Text>
+				<Text style={styles.appTitle}>Chat App</Text>
 				<View style={styles.inputContainer}>
 					<TextInput
 						style={styles.textInput}
